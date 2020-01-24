@@ -14,17 +14,15 @@ def config(path):
     config = configparser.ConfigParser()
 
     if not os.path.exists(path) :
-        config.add_section("setting")
-        config.set("setting", "host", "0.0.0.0")
-        config.set("setting", "port", 25565)
-        config.set("setting", "motd", "A Minecraft server\n&bDowntimeProxy")
-        config.set("setting", "max_players", "20")
-
-        config.add_section("messages")
-        config.set("messages", "kick", "Disconnect by DowntimeProxy")
- 
-        with open("server.ini", "w") as config_file:
-            config.write(config_file)
+        config["setting"] = {}
+        config["setting"]["host"] = "0.0.0.0"
+        config["setting"]["port"] = "25565"
+        config["setting"]["motd"] = r"A Minecraft server\n&bDowntimeProxy"
+        config["setting"]["max_players"] = "20"
+        config["messages"] = {}
+        config["messages"]["kick"] = "Disconnect by DowntimeProxy"
+        with open("server.ini", "w") as f:
+            config.write(f)
     
     global host, port, motd, max_players, kick_message
 
