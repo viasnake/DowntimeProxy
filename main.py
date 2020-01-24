@@ -10,10 +10,21 @@ class QuarryFactory(ServerFactory):
     protocol = QuarryProtocol
 
 def config(path):
-    import re
+    import configparser, re
+    config = configparser.ConfigParser()
 
     if not os.path.exists(path) :
-        raise IOError(path)
+        config.add_section("setting")
+        config.set("setting", "host", "")
+        config.set("setting", "port", 25565)
+        config.set("setting", "motd", "A Minecraft server\n&bDowntimeProxy")
+        config.set("setting", "max_players", "20")
+
+        config.add_section("messages")
+        config.set("messages", "kick", "Disconnect by DowntimeProxy")
+ 
+        with open("server.ini", "w") as config_file:
+            config.write(config_file)
     
     global host, port, motd, max_players, kick_message
 
@@ -23,7 +34,6 @@ def config(path):
     max_players = 20
     kick_message = "Disconnect"
 
-    config = configparser.ConfigParser()
     config.read(path, encoding="utf-8")
     if config.has_option("setting", "host"):
         host = config["setting"]["host"]
