@@ -15,7 +15,7 @@ def config(path):
 
     if not os.path.exists(path) :
         config.add_section("setting")
-        config.set("setting", "host", "")
+        config.set("setting", "host", "0.0.0.0")
         config.set("setting", "port", 25565)
         config.set("setting", "motd", "A Minecraft server\n&bDowntimeProxy")
         config.set("setting", "max_players", "20")
