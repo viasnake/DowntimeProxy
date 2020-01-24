@@ -1,9 +1,11 @@
-import sys, os
+import sys, os, datetime
 from twisted.internet import reactor
 from quarry.net.server import ServerFactory, ServerProtocol
 
 class QuarryProtocol(ServerProtocol):
     def player_joined(self):
+        time = datetime.datetime.now()
+        print("[", time.strftime("%H:%M:%S"), "][INFO] ", self.display_name, " has connected. Host=", self.remote_addr.host, sep='')
         self.close(kick_message)
 
 class QuarryFactory(ServerFactory):
