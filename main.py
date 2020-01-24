@@ -1,4 +1,4 @@
-import sys, os, configparser
+import sys, os
 from twisted.internet import reactor
 from quarry.net.server import ServerFactory, ServerProtocol
 
@@ -28,7 +28,7 @@ def config(path):
     
     global host, port, motd, max_players, kick_message
 
-    host = ""
+    host = "0.0.0.0"
     port = 25565
     motd = "A Minecraft server"
     max_players = 20
@@ -66,7 +66,11 @@ def main(arg):
     factory.max_players = max_players
 
     factory.listen(args.host, args.port)
+    print("DowntimeProxy has started.")
+    print("Host:" , args.host ,"Port:", args.port)
+    print("Ctrl + C to close")
     reactor.run()
+    print("Bye :)")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
