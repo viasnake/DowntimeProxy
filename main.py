@@ -15,7 +15,7 @@ def config(path):
     import configparser, re
     config = configparser.ConfigParser()
 
-    if not os.path.exists(path) :
+    if not os.path.exists(path):
         config["setting"] = {}
         config["setting"]["host"] = "0.0.0.0"
         config["setting"]["port"] = "25565"
