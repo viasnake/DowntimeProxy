@@ -54,13 +54,6 @@ def config(path):
 def main(arg):
     config("server.ini")
 
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-a", "--host", default=host)
-    parser.add_argument("-p", "--port", default=port, type=int)
-    parser.add_argument("-m", "--motd", default=motd)
-    args = parser.parse_args(arg)
-
     factory = QuarryFactory()
     factory.motd = args.motd
     factory.max_players = max_players
