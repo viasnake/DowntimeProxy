@@ -63,7 +63,6 @@ def main(arg):
     print("Host:" , args.host ,"Port:", args.port)
     print("Ctrl + C to close")
     reactor.run()
-    print("Bye :)")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
