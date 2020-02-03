@@ -5,7 +5,7 @@ from quarry.net.server import ServerFactory, ServerProtocol
 class QuarryProtocol(ServerProtocol):
     def player_joined(self):
         time = datetime.datetime.now()
-        print("[", time.strftime("%H:%M:%S"), "][INFO] ", self.display_name, " has connected. Host=", self.remote_addr.host, sep='')
+        self.logger.info("%s has connected." % (self.display_name))
         self.close(kick_message)
 
 class QuarryFactory(ServerFactory):
@@ -40,11 +40,11 @@ def config(path):
     if config.has_option("setting", "port") and re.match("[1-65534]", config["setting"]["port"]):
         port = int(config["setting"]["port"])
     if config.has_option("setting", "motd"):
-        motd = config["setting"]["motd"]
+        motd = str(config["setting"]["motd"])
     if config.has_option("setting", "max_players") and re.match("[1-2147483647]", config["setting"]["port"]):
         max_players = int(config["setting"]["max_players"])
     if config.has_option("messages", "kick"):
-        kick_message = config["messages"]["kick"]
+        kick_message = str(config["messages"]["kick"])
 
     motd = motd.replace("&","§")
     motd = motd.replace(r"\n","\n")
