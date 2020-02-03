@@ -51,18 +51,18 @@ def config(path):
     kick_message = kick_message.replace("&","§")
     kick_message = kick_message.replace(r"\n","\n")
 
-def main(arg):
+def main():
     config("server.ini")
 
     factory = QuarryFactory()
-    factory.motd = args.motd
+    factory.motd = motd
     factory.max_players = max_players
 
-    factory.listen(args.host, args.port)
+    factory.listen(host, port)
     print("DowntimeProxy has started.")
-    print("Host:" , args.host ,"Port:", args.port)
+    print("Host:" , host ,"Port:", port)
     print("Ctrl + C to close")
     reactor.run()
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
