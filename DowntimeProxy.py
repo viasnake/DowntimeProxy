@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sys, os, datetime
 from twisted.internet import reactor
 from quarry.net.server import ServerFactory, ServerProtocol
@@ -25,13 +27,14 @@ def config(path):
         config["messages"]["kick"] = "Disconnect by DowntimeProxy"
         with open("server.ini", "w") as f:
             config.write(f)
-    
-    global host, port, motd, max_players, kick_message
+
+    global host, port, motd, max_players, server_icon, kick_message
 
     host = "0.0.0.0"
     port = 25565
     motd = "A Minecraft server"
     max_players = 20
+    server_icon = None
     kick_message = "Disconnect"
 
     config.read(path, encoding="utf-8")
@@ -43,6 +46,8 @@ def config(path):
         motd = str(config["setting"]["motd"])
     if config.has_option("setting", "max_players") and re.match("[1-2147483647]", config["setting"]["port"]):
         max_players = int(config["setting"]["max_players"])
+    if config.has_option("setting", "server-icon"):
+        server_icon = str(config["setting"]["server-icon"])
     if config.has_option("messages", "kick"):
         kick_message = str(config["messages"]["kick"])
 
@@ -57,6 +62,7 @@ def main():
     factory = QuarryFactory()
     factory.motd = motd
     factory.max_players = max_players
+    factory.icon_path = server_icon
 
     factory.listen(host, port)
     print("DowntimeProxy has started.")
