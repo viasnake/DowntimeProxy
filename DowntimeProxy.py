@@ -6,7 +6,7 @@ from quarry.net.server import ServerFactory, ServerProtocol
 
 HOST = "0.0.0.0"
 PORT = 25565
-MOTD = "A Minecraft server"
+MOTD = "A Minecraft server\n&bDowntimeProxy"
 MAX_PLAYERS = 20
 SERVER_ICON = None
 KICK_MESSAGE = "Disconnect"
@@ -49,10 +49,8 @@ def config(path):
     if config.has_option("messages", "kick"):
         KICK_MESSAGE = str(config["messages"]["kick"])
 
-    MOTD = MOTD.replace("&","§")
-    MOTD = MOTD.replace(r"\n","\n")
-    KICK_MESSAGE = KICK_MESSAGE.replace("&","§")
-    KICK_MESSAGE = KICK_MESSAGE.replace(r"\n","\n")
+    MOTD = MOTD.replace("&","§").replace(r"\n","\n")
+    KICK_MESSAGE = KICK_MESSAGE.replace("&","§").replace(r"\n","\n")
 
 def main():
     config("server.ini")
