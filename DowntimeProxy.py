@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import sys, os, datetime
+import sys, os
 from twisted.internet import reactor
 from quarry.net.server import ServerFactory, ServerProtocol
 
@@ -13,7 +13,6 @@ KICK_MESSAGE = "Disconnect"
 
 class QuarryProtocol(ServerProtocol):
     def player_joined(self):
-        time = datetime.datetime.now()
         self.logger.info("%s has connected." % (self.display_name))
         self.close(KICK_MESSAGE)
 
